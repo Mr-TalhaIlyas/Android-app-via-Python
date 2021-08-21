@@ -1,0 +1,89 @@
+Screen:
+    in_class: text
+    MDLabel:
+        text: "Check your Nick Name"
+        id: txt
+        font_style: 'H2'
+        pos_hint: {'center_x': 0.5, 'center_y': 0.8}
+
+    MDRaisedButton:
+        text: 'Get Nick Name'
+        pos_hint: {'center_x': 0.5, 'center_y': 0.4}
+        icon: 'android'
+        on_press:
+            app.action()
+
+    MDFloatingActionButtonSpeedDial:
+        data: app.data
+        rotation_root_button: True
+        hint_animation: True
+        bg_hint_color: app.theme_cls.primary_light
+        right_pad: True
+        callback: app.callback
+
+    MDTextField:
+        id: text
+        hint_text: 'Enter you Name'
+        helper_text: "Don't have a name so sad :("
+        helper_text_mode: "on_error"
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+        size_hint_x: None
+        width: 300
+        icon_right: "account-search"
+        required: True
+
+    MDLabel:
+        text: ''
+        id: show
+        pos_hint: {'center_x': 0.9, 'center_y': 0.3}
+        theme_text_color: "Custom"
+        text_color: 0, 0, 1, 1
+
+    BoxLayout:
+        orientation: 'vertical'
+        MDToolbar:
+            title: "Nick Namer"
+            left_action_items: [["menu", lambda x: nav_draw.set_state()]]
+        Widget:
+
+    MDNavigationDrawer:
+        id: nav_draw
+        orientation: "vertical"
+        padding: "8dp"
+        spacing: "8dp"
+
+        AnchorLayout:
+            anchor_x: "left"
+            size_hint_y: None
+            height: avatar.height
+            Image:
+                id: avatar
+                size_hint: None, None
+                size: "56dp", "56dp"
+                source: "icon.png"
+        MDLabel:
+            text: "Talha Ilyas"
+            font_style: "Button"
+            size_hint_y: None
+            height: self.texture_size[1]
+
+        MDLabel:
+            text: "mr.talhailyas@gmail.com"
+            font_style: "Caption"
+            size_hint_y: None
+            height: self.texture_size[1]
+
+        ScrollView:
+            MDList:
+                OneLineAvatarListItem:
+                    on_press:
+                        app.toolbar_dialogue()
+                    text: "Home"
+                    IconLeftWidget:
+                        icon: "home"
+                OneLineAvatarListItem:
+                    on_press:
+                        nav_draw.set_state("close")
+                    text: "About"
+                    IconLeftWidget:
+                        icon: 'information'
